@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NSE.Identidade.API.Data;
-using NSE.Identidade.API.Extensions;
+using NSE.Auth.API.Data;
+using NSE.Auth.API.Extensions;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,7 +26,7 @@ var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
 
 
-var appSettings = builder.Configuration.Get<AppSettings>();
+var appSettings = appSettingsSection.Get<AppSettings>();
 var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
 
@@ -41,11 +41,11 @@ builder.Services.AddAuthentication(options =>
     bearerOptions.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+        IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidAudience = appSettings.ValidoEm,
-        ValidIssuer = appSettings.Emissor,
+        ValidAudience = appSettings.Audience,
+        ValidIssuer = appSettings.Issuer,
     };
 });
 

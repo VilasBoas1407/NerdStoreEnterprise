@@ -1,12 +1,10 @@
-﻿using System.Reflection.Metadata;
-
-namespace NSE.Identidade.API.Extensions
+﻿namespace NSE.Auth.API.Extensions
 {
     public class AppSettings
     {
-        public string Secret { get; set; }  
-        public int ExpiracaoHoras { get; set; }
-        public string Emissor { get; set; }
-        public string ValidoEm { get; set; }
+        public string Secret { get; set; }
+        public int Expires { get; set; }
+        public string Issuer { get; set; }
+        public string Audience { get; set; }
     }
 }
