@@ -10,9 +10,9 @@ using System.Text;
 
 namespace NSE.Auth.API.Controllers
 {
-    [ApiController]
+
     [Route("api/auth")]
-    public class AuthController : ControllerBase
+    public class AuthController : MainController
     {
 
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -33,7 +33,7 @@ namespace NSE.Auth.API.Controllers
 
             if(!ModelState.IsValid)
             {
-                return BadRequest();
+                return CustomResponse(ModelState);
             }
 
             var user = new IdentityUser
@@ -47,11 +47,15 @@ namespace NSE.Auth.API.Controllers
 
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, false);
-                return Ok(await GenerateJwt(userRegister.Email));
+                return CustomResponse(await GenerateJwt(userRegister.Email));
             }
 
-            return BadRequest();
+            foreach (var error in result.Errors)
+            {
+                AddProcessError(error.Description);
+            }
+
+            return CustomResponse();
         }
 
         [HttpPost("sign-in")]
@@ -59,15 +63,27 @@ namespace NSE.Auth.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return CustomResponse(ModelState);
             }
 
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password,false,true);
 
             if (result.Succeeded)
-                return Ok(await GenerateJwt(userLogin.Email));
+                return CustomResponse(await GenerateJwt(userLogin.Email));
 
-            return BadRequest();
+            if (result.IsLockedOut)
+            {
+                AddProcessError("Usuário temporariamente bloqueado por tentativas inválidas");
+                return CustomResponse();
+            }
+
+            if(result.RequiresTwoFactor) {
+                AddProcessError("Necessário autenticação de dois fatores");
+                return CustomResponse();
+            }
+
+            AddProcessError("Usuário ou senha incorretos");
+            return CustomResponse();
         }   
 
         private async Task<UserLoginResponse> GenerateJwt(string email)
