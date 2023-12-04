@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Core", "src\Building Bl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carrinho", "Carrinho", "{19C1E88F-F9C7-4B7E-AA48-A08F0FB12881}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalogo", "Catalogo", "{FFCA2A03-2CDF-41E5-8C36-464D4225BADF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{FFCA2A03-2CDF-41E5-8C36-464D4225BADF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cliente", "Cliente", "{BA06D38D-305A-4400-B92B-388ECCCA3296}"
 EndProject
@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pagamento.API", "src\Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Cliente.API", "src\Services\Cliente\NSE.Cliente.API\NSE.Cliente.API.csproj", "{C015685A-6903-45A3-B459-A3E534020D6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Catalogo.API", "src\Services\Catalogo\NSE.Catalogo.API\NSE.Catalogo.API.csproj", "{FE2A583F-5BBB-4DF1-A0F9-3075943D8DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Catalog.API", "src\Services\Catalogo\NSE.Catalogo.API\NSE.Catalog.API.csproj", "{FE2A583F-5BBB-4DF1-A0F9-3075943D8DC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Carrinho.API", "src\Services\Carrinho\NSE.Carrinho.API\NSE.Carrinho.API.csproj", "{DEDF4AB7-B82C-4065-ADCA-CAEC563CDA0E}"
 EndProject
